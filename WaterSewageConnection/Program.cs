@@ -1,3 +1,4 @@
+using Grpc.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
@@ -39,9 +40,9 @@ builder.Services.AddAuthentication(options =>
 	};
 });
 
-builder.Services.AddAuthentication().AddCookie("YourCookieName", options =>
+builder.Services.AddAuthentication().AddCookie("jwtToken", options =>
 {
-	options.Cookie.Name = "YourCookieName";
+	options.Cookie.Name = "jwtToken";
 	options.LoginPath = "/Account/Login";
 });
 
@@ -57,7 +58,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Account/Login");
+	// Use UseExceptionHandler to handle unexpected errors and redirect users to an error page
+	//app.UseExceptionHandler("/Account/Login");
+	app.UseExceptionHandler("/Account/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -67,14 +70,18 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.Use(async (context, next) =>
+
+// built-in Middleware for Exception Handling and Status Code Pages
+app.UseStatusCodePages(async context =>
 {
-	if (context.Response.StatusCode == 404 || context.Response.StatusCode == 401)
-	{
-		context.Request.Path = "/Account/Login";
-		await next();
-	}
-	await next();
+	var response = context.HttpContext.Response;
+	var statuscode = response.StatusCode;
+
+	if (statuscode == StatusCodes.Status401Unauthorized)
+		response.Redirect("/Account/Login");
+	else if (statuscode == StatusCodes.Status404NotFound)
+		response.Redirect("/Account/Error?errorCode=404");
+
 });
 
 // Middleware configuration (middleware stays above authentication and authorization)

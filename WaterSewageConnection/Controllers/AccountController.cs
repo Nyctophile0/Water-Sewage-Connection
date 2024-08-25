@@ -90,5 +90,10 @@ namespace WaterSewageConnection.Controllers
 			//return View();
 		}
 
+		public IActionResult Error(string errorCode)
+		{
+			ViewBag.ErrorCode = errorCode;
+			return View();
+		}
 	}
 }
