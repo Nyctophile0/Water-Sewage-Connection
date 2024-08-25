@@ -14,6 +14,7 @@ namespace WaterSewageConnection.Controllers
 		private readonly IConfiguration _config;
 		private readonly ITokenService _tokenService;
 		private readonly IUserService _userService;
+		private readonly IUserService _userService1;
 
 		public AccountController(IConfiguration config, ITokenService tokenService, IUserService userService)
 		{
