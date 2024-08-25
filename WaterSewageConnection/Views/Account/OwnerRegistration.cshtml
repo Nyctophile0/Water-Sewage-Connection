@@ -1,0 +1,268 @@
+﻿@model WaterSewageConnection.Models.OwnerDetails
+
+@{
+	ViewData["Title"] = "OwnerRegistration";
+	Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<script src="~/js/jquery.min.js"></script>
+
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+
+
+	<div class="row justify-content-center gutters text-align">
+		<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+			
+				<div class="card m-0">
+					<div class="card-header">
+						<div class="card-title">जलकल विभाग</div>
+						<ul class="text-muted custom">
+							<li>* पासवर्ड 8 अक्षर लंबा होना चाहिए.</li>
+							<li>
+								* पासवर्ड कन्फर्म पासवर्ड के समान होना चाहिए।
+							</li>
+							@* <li>* You can then remix that once again with size-specific column classes.</li>
+							<li>* Group checkboxes or radios on the same horizontal row by adding .form-check-inline to any .form-check.</li> *@
+						</ul>
+					</div>
+					<div class="card-body">
+						
+						@using (Html.BeginForm("OwnerRegistration", "Account", FormMethod.Post, new { encType = "multipart/form-data" }))
+						{
+							@Html.AntiForgeryToken()
+
+							<div class="row gutters">
+
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputName" class="col-form-label">नाम</label>
+										@Html.TextBoxFor(m=>m.OwnerName, new {@class="form-control", @id="txtOwnerName"})
+										
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputFatherSpouseName" class="col-form-label">पिता/ पति का नाम</label>
+										@Html.TextBoxFor(m=>m.OwnerFatherHusbandName, new {@class="form-control", @id="txtOwnerFatherHusbandName"})
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputMobile" class="col-form-label">मोबाइल नo</label>
+										@Html.TextBoxFor(m=>m.MobileNo, new {@class="form-control", @id="txtMobileNo"})
+									</div>
+								</div>
+
+
+
+							
+							
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+							<div class="form-group">
+								<label for="zoneddl" class="col-form-label">ज़ोन</label>
+								<select class="form-control " id="zoneddl" name="ZoneId">
+								</select>
+							</div>
+						</div>
+
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+							<div class="form-group">
+								<label for="wardddl" class="col-form-label">वार्ड</label>
+								<select class="form-control " id="wardddl" name="WardId">
+								</select>
+							</div>
+						</div>
+
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+							<div class="form-group">
+								<label for="mohalladdl" class="col-form-label">मोहल्ला</label>
+								<select class="form-control " id="mohalladdl" name="MohallaId">
+								</select>
+							</div>
+						</div>
+
+								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label for="inputAddress" class="col-form-label">पता</label>
+										
+										@Html.TextAreaFor(m=>m.Address, new {@class="form-control", @id="txtAddress", @style="resize:none;", @rows="3"})
+									</div>
+								</div>
+							</div>
+
+							<div class="row gutters">
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputEmail" class="col-form-label">ईमेल</label><br />
+										@Html.TextBoxFor(m=>m.Email, new {@class="form-control", @id="txtEmail"})
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputPassword" class="col-form-label">पासवर्ड</label><br />
+										@Html.PasswordFor(m=>m.Password, new {@class="form-control", @id="txtPassword"})
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+									<div class="form-group">
+										<label for="inputConfirmPassword" class="col-form-label">कन्फर्म पासवर्ड </label><br />
+										@Html.PasswordFor(m=>m.ConfirmPassword, new {@class="form-control", @id="txtConfirmPassword"})
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row gutters">
+								<div class="col-xl-12">
+									<button type="submit" id="btnsubmit" class="btn btn-primary float-right">साइन अप करें</button>
+								</div>
+							</div>
+						}
+
+						
+
+						<div class="m-0">
+							<span class="additional-link">पहले से खाता मौजूद है? <a href="/Account/Login" class="btn btn-secondary">लॉग इन करें</a></span>
+						</div>
+
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+
+</div>
+<!-- Content wrapper end -->
+
+<script async type="text/javascript">
+
+	$(document).ready(function () {
+		bindZone('zoneddl', -1);
+		bindWard('wardddl', -1);
+		bindMohalla('mohalladdl', -1);
+
+		$('#zoneddl').change(function () {
+			bindWard('wardddl', -1);
+		});
+
+		$('#wardddl').change(function () {
+			bindMohalla('mohalladdl', -1);
+		});
+	});
+
+	function bindZone(id, defaultSelectionValues) {
+
+		defaultSelectionValues = typeof defaultSelectionValues !== 'undefined' ? defaultSelectionValues : '';
+		if (defaultSelectionValues == -1 || defaultSelectionValues == 0 || defaultSelectionValues == '-1' || defaultSelectionValues == '') {
+			defaultSelectionValues = '-1';
+		}
+		var obj = new Object();
+		obj.Action = "bindZone";
+
+		$.ajax({
+			type: 'POST',
+			url: '/Dropdown/fillDropdown',
+			data: { Action: obj.Action },
+			success: function (Data) {
+				var ddl = $('#' + id);
+				ddl.empty();
+				ddl.append($('<option/>', {
+					value: "-1",
+					text: "Choose option "
+				}));
+
+				$.each(Data, function (index, rowData) {
+					ddl.append($('<option/>', {
+						value: rowData.id,
+						text: rowData.value
+					}));
+				});
+				ddl.val(defaultSelectionValues);
+			},
+			error: function (errorData) {
+				console.log(errorData);
+			}
+		});
+
+	}
+
+	function bindWard(id, defaultSelectionValues) {
+
+		defaultSelectionValues = typeof defaultSelectionValues !== 'undefined' ? defaultSelectionValues : '';
+		if (defaultSelectionValues == -1 || defaultSelectionValues == 0 || defaultSelectionValues == '-1' || defaultSelectionValues == '') {
+			defaultSelectionValues = '-1';
+		}
+		var obj = new Object();
+		obj.Action = "bindWard";
+		obj.ZoneId = $('#zoneddl').val();
+
+		$.ajax({
+			type: 'POST',
+			url: '/Dropdown/fillDropdown',
+			data: { Action: obj.Action, ZoneId: obj.ZoneId },
+			success: function (Data) {
+				var ddl = $('#' + id);
+				ddl.empty();
+				ddl.append($('<option/>', {
+					value: "-1",
+					text: "Choose option "
+				}));
+
+				$.each(Data, function (index, rowData) {
+					ddl.append($('<option/>', {
+						value: rowData.id,
+						text: rowData.value
+					}));
+				});
+				ddl.val(defaultSelectionValues);
+			},
+			error: function (errorData) {
+				console.log(errorData);
+			}
+		});
+
+	}
+
+	function bindMohalla(id, defaultSelectionValues) {
+
+		defaultSelectionValues = typeof defaultSelectionValues !== 'undefined' ? defaultSelectionValues : '';
+		if (defaultSelectionValues == -1 || defaultSelectionValues == 0 || defaultSelectionValues == '-1' || defaultSelectionValues == '') {
+			defaultSelectionValues = '-1';
+		}
+		var obj = new Object();
+		obj.Action = "bindMohalla";
+		obj.WardId = $('#wardddl').val();
+
+		$.ajax({
+			type: 'POST',
+			url: '/Dropdown/fillDropdown',
+			data: { Action: obj.Action, WardId: obj.WardId },
+			success: function (Data) {
+				var ddl = $('#' + id);
+				ddl.empty();
+				ddl.append($('<option/>', {
+					value: "-1",
+					text: "Choose option "
+				}));
+
+				$.each(Data, function (index, rowData) {
+					ddl.append($('<option/>', {
+						value: rowData.id,
+						text: rowData.value
+					}));
+				});
+				ddl.val(defaultSelectionValues);
+			},
+			error: function (errorData) {
+				console.log(errorData);
+			}
+		});
+
+	}
+</script>

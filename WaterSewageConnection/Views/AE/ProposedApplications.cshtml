@@ -1,0 +1,375 @@
+﻿
+@{
+    ViewData["Title"] = "ProposedApplications";
+    Layout = "~/Views/Shared/_AELayout.cshtml";
+}
+
+<script src="~/js/jquery.min.js"></script>
+
+<style>
+	.inline-input {
+		display: inline;
+		width: auto;
+		border: none;
+		border-bottom: 1.5px solid #ccc;
+		outline: none;
+	}
+
+	.inline-ddl {
+		width: 15% !important;
+		border: none;
+		border-bottom: 1.5px solid #ccc;
+		outline: none;
+	}
+	bold {
+		font-weight: bold;
+	}
+</style>
+
+
+<div class="page-header">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/AE/Dashboard">होम</a></li>
+		<li class="breadcrumb-item active">आवेदनों का विवरण देखें</li>
+	</ol>
+
+</div>
+
+<div class="content-wrapper">
+
+	<!-- Row start -->
+	<div class="row gutters">
+		<div class="col-xl-12">
+			<div class="card plain">
+				<div class="card-body">
+					<!-- Row start -->
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="hotelMapScroll">
+								<div class="hospital-maps-container">
+									<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+
+										<div class="hospital-location">
+											<div class="hospital-title">Application - 1</div>
+											<div class="hospital-address">
+												Ward- ward1, Mohalla- mohalla1
+											</div>
+											<div class="">
+												<span class="badge badge-pill badge-secondary">Pending</span>
+												<span class="badge badge-pill badge-info">Extra Connection</span>
+												<span class="badge badge-pill badge-info">Pipe Shifting</span>
+											</div>
+
+										</div>
+									</a>
+
+									<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target="#WaterConnectionForm">
+										<div class="hospital-location">
+											<div class="hospital-title">Application - 2</div>
+											<div class="hospital-address">
+												Ward- ward2, Mohalla- mohalla2
+											</div>
+											<div class="">
+												<span class="badge badge-pill badge-secondary">Pending</span>
+												<span class="badge badge-pill badge-info">Fresh Connection</span>
+												<span class="badge badge-pill badge-info">Water Connection</span>
+											</div>
+
+										</div>
+									</a>
+									<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+										<div class="hospital-location">
+											<div class="hospital-title">Application - 3</div>
+											<div class="hospital-address">
+												Ward- ward3, Mohalla- mohalla3
+											</div>
+											<div class="">
+												<span class="badge badge-pill badge-secondary">Pending</span>
+												<span class="badge badge-pill badge-info">Extra Connection</span>
+												<span class="badge badge-pill badge-info">Sewage Connection</span>
+											</div>
+
+										</div>
+									</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="OtherConnectionsForm">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myExtraLargeModalLabel">पुष्टि करें</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p><bold>सहायक अभियन्ता/ अधिशामि अभियन्ता,</bold></p><br />
+				<p>
+					आज दिनांक <span><input type="date" class="form-control inline-input" id="inputName" placeholder=""></span>को मेरे द्वारा प्रश्वगत भवन भूखष्ट स्थल का निरीक्षण एवं नलकार/ प्लम्बर द्वारा प्रस्तुत भानचित्र की जाँच कर ली गई है जिसका विवरण निम्न है:
+				</p>
+				<p>
+					<bold>(क)</bold> आवेदक/उपसा प्रश्नवद सम्पति के स्वामी/ स्वामिनी/ किरायेदार/ किरायदारिता/स्टी है जिसके प्रभार को बाया प्रति संलग्न है-<br />वर्णित भवन/ भूखण्ड संख्या <input type="text" class="form-control inline-input" /> मौहल्ला
+					<select class="form-control selectpicker inline-ddl" data-live-search="true" id="mohalladdl">
+						<option >मौहल्ला 1</option>
+						<option >मौहल्ला 2</option>
+						<option >मौहल्ला 3</option>
+					</select>&nbsp; वार्ड
+					<select class="form-control selectpicker inline-ddl" data-live-search="true" id="wardddl">
+						<option>वार्ड 1</option>
+						<option>वार्ड 2</option>
+						<option>वार्ड 3</option>
+					</select> में माँगा गया यह नया जल संयोजन प्रथम/ द्वितीय/ तृतीय संयोजन है और मौके पर अभी चालू नाहीं है।
+				</p><br />
+
+				<p><bold>(ख)</bold> यह जल संयोजन <input type="text" class="form-control inline-input" /> मि.मि. व्यास की सी.आई/ पी.वी.सी./ ए. सी. वितरण पाइप तधन से दिया जाना है जिसका रख रखाव कतकल विभाग/जल निगम द्वारा किया जा रहा है।</p><br />
+
+				<p><bold>(ग)</bold> यह सीवर संयोजन <input type="text" class="form-control inline-input" /> मि.मि. व्यास की मीवर लाइन से दिया जाना है जिसका रख-रखाव जलकल विभाग/ जल निगम द्वारा किया जा रहा है।</p><br />
+
+				<p>
+					<bold>(घ)</bold> जलोत्पारण हेतु मौके पर ड्रेन की व्यवस्था है/ नहीं है।</
+				</p><br/>
+
+				<p><bold>(ड)</bold> जल संयोजन/सीवर संयोजन भवन के <input type="text" class="form-control inline-input" /> तल पर दिया जाना है जिसमें <input type="text" class="form-control inline-input" /> टॉटियाँ/ डब्लू.सी. लगाई जायेगी।</p><br />
+
+				<p><bold>(च)</bold> जल संयोजन में <input type="text" class="form-control inline-input" /> फैरूल तथा <input type="text" class="form-control inline-input" /> व्याम के पाइप कनेक्शन की संस्तुति की जाती है। </p><br/>
+
+				<p><bold>(छ)</bold> सीवर संयोजन में <input type="text" class="form-control inline-input" /> व्यास की एस.डब्लू./सी.सी. पाइप कनैक्शन की संस्तुति की जाती है।</p><br/>
+
+				<p><bold>(ज)</bold> इस जल/सीवर संयोजन हेतु नगर निगम/सा.नि.वि./विकास प्राधिकरण की सड़क निम्नानुसार काटो जायेगी जो संलग्न मानचित्र में दर्शायी गयी है। इसका निर्धारित दर पर रोड कटिंग शुल्क उपभोक्ता को सम्बन्धित विभाग में जमा करते हुये रोड कटिंग रसीद प्रस्तुत करने पर जल/सीवर संयोजन दिये जाने पर विचार किया जायेगा।</p><br/>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>कच्चा सड़क रनिंग मोटर</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>ईटों का फर्श</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>ईटों का खरंजा</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>डामर की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>सीमेंट कंक्रीट की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>पत्थर की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-lighten" data-dismiss="modal">पीछे जाए</button>
+				<button type="button" class="btn btn-primary">सेव करें</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="WaterConnectionForm">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myExtraLargeModalLabel">पुष्टि करें</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p><bold>फॅशन शिफ्टि फैशल बढ़ाने पाइप फिटिंग बदलयाने हेतुः</bold></p><br />
+				<p>
+					आज दिनांक <span><input type="date" class="form-control inline-input" id="inputName" placeholder=""></span>को मेरे द्वारा प्रश्वगत भवन भूखष्ट स्थल का निरीक्षण एवं नलकार/ प्लम्बर द्वारा प्रस्तुत भानचित्र की जाँच कर ली गई है जिसका विवरण निम्न है:
+				</p>
+				<p>
+					<bold>(क)</bold> आवेदनकर्ता/ कर्ती का वर्तमान में <input type="text" class="form-control inline-input" /> पाइप लाइन पर <input type="text" class="form-control inline-input" /> का फैरुल है अब प्रान्ने प्रार्थिनी अपने संयोजन का फैरुल व्यास की लाइन पर तथा <input type="text" class="form-control inline-input" />  पि.मि का स्थानान्तरित कराना चाहता/ चाहती है। कनैक्शन पाइप बदलवाना चाहता/चाहती है।
+				</p><br />
+
+				<p><bold>(ख)</bold> उक्त प्रस्तावित कार्य के फैसल शिपिट/ फैरूल बढ़ाने/ पाइप लाइन बदलवाने हेतु नगर निगम आगरा/ सा. नि. वि. की सड़क निम्नानुसार काटी जायेगी:-</p><br />
+
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>कच्चा सड़क रनिंग मोटर</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>ईटों का फर्श</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>ईटों का खरंजा</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>डामर की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>सीमेंट कंक्रीट की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>पत्थर की सड़क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /> मीटर</p>
+					</div>
+				</div>
+
+				<br/>
+
+				<p>उपरोक्तानुसार रोड कटिंग चार्जेज सम्बन्धित विभाग में जमा कराये जाने के उपरान्त निम्नानुसार धनराशि जमा करायी जानी प्रस्तावित है।</p><br />
+
+
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>पंजीकरण शुल्क</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /></p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>अग्रिम जलमूल्य</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /></p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>मीटर जमानत</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /></p>
+					</div>
+				</div>
+
+				<div class="row gutters">
+					<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+						<p>अन्य मद यथा रोड कटिंग आदि</p>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-8">
+						<p>रु० <input type="text" class="form-control inline-input" /></p>
+					</div>
+				</div>
+
+				<br/>
+
+				<p>
+					जलापूर्ति सीवर व्यवस्था विकास शुल्क/सुदृढ़ीकरण शुल्क
+				</p><br />
+
+				<p><bold>(क)</bold> धनराशि रु० <input type="text" class="form-control inline-input" /> जमा करें।</p>
+
+				<p><bold>(ख)</bold> यूनतम विकास/मुद्दीकरण शुल्क रु० 1,000/- लिया जाये। </p>
+
+				<p> भवन भूखण्ड का कुल क्षेत्रफल <input type="text" class="form-control inline-input" /> वर्ग मीटर है। क्षेत्रफल के साक्ष्य हेतु प्रमाण के रूप में स्वीकृत मानचित्र की प्रति/रजिस्ट्री छाया प्रति संलग्न है।</p><br/>
+
+				<p class="text-center"><bold>अथवा</bold></p><br />
+
+				<p>
+					भवन/ भूखण्ड संख्या <input type="text" class="form-control inline-input" /> मुहल्ला
+					<select class="form-control selectpicker inline-ddl" data-live-search="true" id="mohalladdl">
+						<option>मौहल्ला 1</option>
+						<option>मौहल्ला 2</option>
+						<option>मौहल्ला 3</option>
+					</select> &nbsp; का कर निर्धारण नगर निगम द्वारा वर्ष  <input type="text" class="form-control inline-input" />  में किया था जो दि० 01.09.76 से पूर्व का है।
+				</p><br />
+
+				<p>उक्त भवन/ भूखण्ड का मानचित्र आगरा विकास प्राधिकरण/उ०प्र०आ०वि० परिषद द्वारा दिनांक <input type="date" class="form-control inline-input" id="inputName" placeholder=""> को स्वीकृत किया गया जो दि० 01.09.76 से पूर्व का है। संलग्न प्रभार के अनुसार विकास शुल्क देय नहीं है।</p><br />
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-lighten" data-dismiss="modal">पीछे जाए</button>
+				<button type="button" class="btn btn-primary">सेव करें</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$('#AEdashboard').removeClass("active-page");
+		$('#AEproposedconnections').addClass("active-page");
+	});
+
+
+</script>

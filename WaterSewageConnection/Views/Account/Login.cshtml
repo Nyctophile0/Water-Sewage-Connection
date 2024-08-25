@@ -1,0 +1,51 @@
+﻿@model WaterSewageConnection.Models.Users
+
+@{
+	ViewData["Title"] = "लॉग इन";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<!-- Container start -->
+<div class="container">
+
+	
+		<div class="row justify-content-md-center">
+			<div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+				<div class="login-screen">
+					<div class="login-box">
+						<a href="#" class="login-logo text-center text-success" >
+							<h2>जल/ सीवर संयोजन की प्रक्रिया</h2>
+						</a>
+						<h3 class="text-center">लॉग इन करें</h3>
+
+						@using (Html.BeginForm("Login","Account", FormMethod.Post))
+						{
+							<div class="form-group">
+								<label for="inputEmail" class="col-form-label">ईमेल</label>
+								@Html.TextBoxFor(m=>m.userName, new {@class="form-control",@id="inputEmail"})
+								
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-form-label">पासवर्ड</label>
+							@Html.PasswordFor(m=>m.password, new {@class="form-control",@id="inputPassword"})
+							</div>
+							<div class="actions">
+								@* <a href="forgot-pwd.html">Recover password</a> *@
+								<button type="submit" class="btn btn-primary">लॉग इन</button>
+							</div>
+						}
+
+						
+						<hr>
+						<div class="m-0">
+							<span class="additional-link"> खाता नहीं? <a href="/Account/OwnerRegistration" class="btn btn-secondary">साइन अप करें</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+</div>
+<!-- Container end -->
