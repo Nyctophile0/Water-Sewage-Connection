@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Net;
 using System.Numerics;
@@ -8,19 +9,31 @@ namespace WaterSewageConnection.Models
 	public class OwnerDetails : ConClass
 	{
 		public string OwnerUser_Number { get; set; }
+		[Required(ErrorMessage ="*")]
 		public string OwnerName { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string OwnerFatherHusbandName { get; set; }
 		public string Email { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string MobileNo { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string Address { get; set; }
+		[Required(ErrorMessage = "*")]
 		public int PinCode { get; set; }
 		public string IP_Address { get; set; }
 		public string Action { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string WardId { get; set; }
 		public string WardName { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string MohallaId { get; set; }
 		public string MohallaName { get; set; }
+		[Required(ErrorMessage ="*")]
+		public string ZoneId { get; set; }
+		public string ZoneName { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string Password { get; set; }
+		[Required(ErrorMessage = "*")]
 		public string ConfirmPassword { get; set; }
 
 		public DataSet getDataSet()

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WaterSewageConnection.Controllers
 {
+	[Authorize(Roles = "AE")]
 	public class AEController : Controller
 	{
 		public IActionResult Index()

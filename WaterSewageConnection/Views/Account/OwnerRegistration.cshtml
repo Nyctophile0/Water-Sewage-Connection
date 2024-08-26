@@ -6,6 +6,9 @@
 }
 
 <script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.js"></script>
 
 <!-- Content wrapper start -->
 <div class="content-wrapper">
@@ -36,7 +39,7 @@
 
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputName" class="col-form-label">नाम</label>
+										<label for="inputName" class="col-form-label">नाम </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.OwnerName)</span>
 										@Html.TextBoxFor(m=>m.OwnerName, new {@class="form-control", @id="txtOwnerName"})
 										
 									</div>
@@ -44,14 +47,14 @@
 
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputFatherSpouseName" class="col-form-label">पिता/ पति का नाम</label>
+									<label for="inputFatherSpouseName" class="col-form-label">पिता/ पति का नाम </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.OwnerFatherHusbandName)</span>
 										@Html.TextBoxFor(m=>m.OwnerFatherHusbandName, new {@class="form-control", @id="txtOwnerFatherHusbandName"})
 									</div>
 								</div>
 
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputMobile" class="col-form-label">मोबाइल नo</label>
+									<label for="inputMobile" class="col-form-label">मोबाइल नo </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.MobileNo)</span>
 										@Html.TextBoxFor(m=>m.MobileNo, new {@class="form-control", @id="txtMobileNo"})
 									</div>
 								</div>
@@ -62,7 +65,7 @@
 							
 						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 							<div class="form-group">
-								<label for="zoneddl" class="col-form-label">ज़ोन</label>
+									<label for="zoneddl" class="col-form-label">ज़ोन </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.ZoneId)</span>
 								<select class="form-control " id="zoneddl" name="ZoneId">
 								</select>
 							</div>
@@ -70,7 +73,7 @@
 
 						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 							<div class="form-group">
-								<label for="wardddl" class="col-form-label">वार्ड</label>
+								<label for="wardddl" class="col-form-label">वार्ड </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.WardId)</span>
 								<select class="form-control " id="wardddl" name="WardId">
 								</select>
 							</div>
@@ -78,7 +81,7 @@
 
 						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 							<div class="form-group">
-								<label for="mohalladdl" class="col-form-label">मोहल्ला</label>
+									<label for="mohalladdl" class="col-form-label">मोहल्ला </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.MohallaId)</span>
 								<select class="form-control " id="mohalladdl" name="MohallaId">
 								</select>
 							</div>
@@ -86,7 +89,7 @@
 
 								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
-										<label for="inputAddress" class="col-form-label">पता</label>
+										<label for="inputAddress" class="col-form-label">पता </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.Address)</span>
 										
 										@Html.TextAreaFor(m=>m.Address, new {@class="form-control", @id="txtAddress", @style="resize:none;", @rows="3"})
 									</div>
@@ -96,21 +99,21 @@
 							<div class="row gutters">
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputEmail" class="col-form-label">ईमेल</label><br />
+									<label for="inputEmail" class="col-form-label">ईमेल </label>@* <span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.Email)</span> *@<br />
 										@Html.TextBoxFor(m=>m.Email, new {@class="form-control", @id="txtEmail"})
 									</div>
 								</div>
 
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputPassword" class="col-form-label">पासवर्ड</label><br />
+										<label for="inputPassword" class="col-form-label">पासवर्ड </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.Password)</span><br />
 										@Html.PasswordFor(m=>m.Password, new {@class="form-control", @id="txtPassword"})
 									</div>
 								</div>
 
 								<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
 									<div class="form-group">
-										<label for="inputConfirmPassword" class="col-form-label">कन्फर्म पासवर्ड </label><br />
+										<label for="inputConfirmPassword" class="col-form-label">कन्फर्म पासवर्ड </label><span class="text-danger" style="font-weight:bold; "> @Html.ValidationMessageFor(m=>m.ConfirmPassword)</span><br />
 										@Html.PasswordFor(m=>m.ConfirmPassword, new {@class="form-control", @id="txtConfirmPassword"})
 									</div>
 								</div>

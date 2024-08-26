@@ -35,24 +35,54 @@ namespace WaterSewageConnection.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Users obj)
         {
-			obj.Role = "Owner";
+			//obj.Role = "Owner";
 			//obj.Role = "Admin";
-			// define claims
-			var claims = new[] { new Claim(ClaimTypes.Role, obj.Role), new Claim(ClaimTypes.Name, obj.userName) };
+			try
+			{
+				var check_user = await _userService.UserAuthentication(obj);
+				var userdata = await _userService.GetUserRole(obj);
 
-			var check_user = await _userService.UserAuthentication(obj);
+				if (!string.IsNullOrEmpty(userdata.userType.ToString()) && check_user)
+				{
+					// define claims
+					var claims = new[] { new Claim(ClaimTypes.Role, userdata.userType), new Claim(ClaimTypes.Name, userdata.userName) };
 
-			// get jwt token
-			var accesstoken = _tokenService.GenerateJSONWebToken(claims);
+					// get jwt token
+					var accesstoken = _tokenService.GenerateJSONWebToken(claims);
 
-			// save to cookie
-			if (accesstoken != null)
-				SetJWTCookie(accesstoken);
-			else
-				return Unauthorized();
+					// save to cookie
+					if (accesstoken != null)
+						SetJWTCookie(accesstoken);
+					else
+						return Unauthorized();
 
-			return RedirectToAction("Dashboard", "Owner");
+					switch(userdata.userType.ToString())
+					{
+						case "Admin":
+							return RedirectToAction("Dashboard", "Admin");
+						case "Owner":
+							return RedirectToAction("Dashboard", "Owner");
+						case "AE":
+							return RedirectToAction("Dashboard", "AE");
+						case "JE":
+							return RedirectToAction("Dashboard", "JE");
+						case "HCN":
+							return RedirectToAction("Dashboard", "HCN");
+						default:
+							return RedirectToAction("Error", "Account");
+					}
+					
+				}
 
+				TempData["errormsg"] = "Invalid Credentials";
+				return View();
+
+			}
+			catch(Exception ex)
+			{
+				TempData["exmsg"] = ex.Message.ToString();
+				return RedirectToAction("Error", "Account");
+			}
 		}
 
 		public IActionResult Logout()

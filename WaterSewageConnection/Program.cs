@@ -114,7 +114,7 @@ app.UseSession();
 // The MapControllerRoute() defines the default route pattern that specifies which controller, action, and optional route parameters should be used to handle incoming requests.
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=JE}/{action=ProposedApplications}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 
 // runs the application,start listening the incomming request. It turns a console application into an MVC application based on the provided configuration.

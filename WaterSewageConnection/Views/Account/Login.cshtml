@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.js"></script>
+
 <!-- Container start -->
 <div class="container">
 
@@ -14,19 +19,24 @@
 				<div class="login-screen">
 					<div class="login-box">
 						<a href="#" class="login-logo text-center text-success" >
-							<h2>जल/ सीवर संयोजन की प्रक्रिया</h2>
+						@* <h2 class="text-center login-logo text-success">जलकल विभाग</h2> *@
+						<h2 class="">जलकल विभाग</h2>
 						</a>
+					
+
 						<h3 class="text-center">लॉग इन करें</h3>
 
 						@using (Html.BeginForm("Login","Account", FormMethod.Post))
 						{
+							@Html.AntiForgeryToken()
+
 							<div class="form-group">
-								<label for="inputEmail" class="col-form-label">ईमेल</label>
+							<label for="inputEmail" class="col-form-label">ईमेल</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.userName)</span>
 								@Html.TextBoxFor(m=>m.userName, new {@class="form-control",@id="inputEmail"})
 								
 							</div>
 							<div class="form-group">
-								<label for="inputPassword" class="col-form-label">पासवर्ड</label>
+							<label for="inputPassword" class="col-form-label">पासवर्ड</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.password)</span>
 							@Html.PasswordFor(m=>m.password, new {@class="form-control",@id="inputPassword"})
 							</div>
 							<div class="actions">
