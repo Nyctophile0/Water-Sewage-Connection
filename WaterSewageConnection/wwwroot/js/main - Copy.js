@@ -53,7 +53,7 @@ $(function() {
 
 // Loading
 $(function() {
-	$("#loading-wrapper").fadeOut(700);
+	$("#loading-wrapper").fadeOut(3000);
 });
 
 

@@ -55,6 +55,7 @@ builder.Services.AddAuthentication().AddCookie("jwtToken", options =>
 //builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IConnectionService, ConnectionService>();
 
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
@@ -99,6 +100,8 @@ app.UseStatusCodePages(async context =>
 		response.Redirect("/Account/Login");
 	else if (statuscode == StatusCodes.Status404NotFound)
 		response.Redirect("/Account/Error?errorCode=404");
+	else if (statuscode == StatusCodes.Status403Forbidden)
+		response.Redirect("/Account/Unauthorize?errorCode=403");
 
 });
 

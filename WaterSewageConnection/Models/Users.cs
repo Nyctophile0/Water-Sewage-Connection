@@ -92,5 +92,34 @@ namespace WaterSewageConnection.Models
             }
         }
         
+        public async Task<bool> getUserDataAsync()
+        {
+
+            DataSet ds = new DataSet();
+            ds = await getDataSetAsync();
+            if (ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dr = ds.Tables[0].Rows[0];
+                    //this.userId = Convert.ToInt32(dr["userId"].ToString());
+                    this.userName = dr["userName"].ToString();
+                    //this.password = dr["password"].ToString();
+                    //this.userType = dr["userType"].ToString();
+
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }

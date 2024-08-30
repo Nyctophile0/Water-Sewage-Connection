@@ -42,7 +42,7 @@ namespace WaterSewageConnection.Controllers
 				var check_user = await _userService.UserAuthentication(obj);
 				var userdata = await _userService.GetUserRole(obj);
 
-				if (!string.IsNullOrEmpty(userdata.userType.ToString()) && check_user)
+				if (!string.IsNullOrEmpty(userdata.userType) && check_user)
 				{
 					// define claims
 					var claims = new[] { new Claim(ClaimTypes.Role, userdata.userType), new Claim(ClaimTypes.Name, userdata.userName) };
@@ -121,6 +121,12 @@ namespace WaterSewageConnection.Controllers
 		}
 
 		public IActionResult Error(string errorCode)
+		{
+			ViewBag.ErrorCode = errorCode;
+			return View();
+		}
+
+		public IActionResult Unauthorize(string errorCode)
 		{
 			ViewBag.ErrorCode = errorCode;
 			return View();

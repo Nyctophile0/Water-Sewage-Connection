@@ -30,7 +30,7 @@ namespace WaterSewageConnection.Services
 			var token = new JwtSecurityToken(
 				//issuer: "WaterConnection",
 				//audience: "dotnetclient",
-				expires: DateTime.Now.AddMinutes(1),
+				expires: DateTime.Now.AddHours(1),
 				signingCredentials: credentials,
 				claims: claims
 				);

@@ -69,6 +69,7 @@ namespace WaterSewageConnection.Models
 				cmd.Parameters.AddWithValue("@OwnerFatherHusbandName", this.OwnerFatherHusbandName);
 				cmd.Parameters.AddWithValue("@MobileNo", this.MobileNo);
 				cmd.Parameters.AddWithValue("@Address", this.Address);
+				cmd.Parameters.AddWithValue("@ZoneId", this.ZoneId);
 				cmd.Parameters.AddWithValue("@WardId", this.WardId);
 				cmd.Parameters.AddWithValue("@MohallaId", this.MohallaId);
 				cmd.Parameters.AddWithValue("@Email", this.Email);
@@ -103,6 +104,7 @@ namespace WaterSewageConnection.Models
 					this.MobileNo = dr["MobileNo"].ToString();
 					this.Email = dr["Email"].ToString();
 					this.Address = dr["Address"].ToString();
+					this.ZoneName = dr["ZoneName"].ToString();
 					this.WardName = dr["WardName"].ToString();
 					this.MohallaName = dr["MohallaName"].ToString();
 

@@ -14,11 +14,13 @@ namespace WaterSewageConnection.Controllers
 	{
 		private readonly IConfiguration _config;
 		private readonly ITokenService _tokenService;
+		private readonly IConnectionService _connectionService;
 
-		public OwnerController(IConfiguration config, ITokenService tokenService)
+		public OwnerController(IConfiguration config, ITokenService tokenService, IConnectionService connectionService)
 		{
 			_config = config;
 			_tokenService = tokenService;
+			_connectionService = connectionService;
 		}
 
 		public IActionResult Index()
@@ -58,7 +60,7 @@ namespace WaterSewageConnection.Controllers
 		public async Task<IActionResult> Connection(ConnectionDetails obj)
 		{
 			obj.guid = Guid.NewGuid().ToString();
-			string msg = "";
+			bool msg;
 			List<string> filetypes = new List<string>();
 			List<IFormFile> files = new List<IFormFile>();
 			obj.Action = "insertConnection";
@@ -113,11 +115,9 @@ namespace WaterSewageConnection.Controllers
 					}
 				}
 
-				obj.save(out msg);
-				if (msg != "inserted")
-					msg = "error";
-
-				TempData["msg"] = msg;
+				msg = await _connectionService.AddConnection(obj);
+				if (!msg)
+					TempData["errormsg"] = "Error";
 
 				return RedirectToAction("Connection");
 			}

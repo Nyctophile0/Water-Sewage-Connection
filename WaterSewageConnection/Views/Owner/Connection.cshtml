@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_OwnerLayout.cshtml";
 }
 <script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.js"></script>
 <!-- Page header start -->
 <div class="page-header">
 	<ol class="breadcrumb">
@@ -36,9 +39,28 @@
 								<div class="row gutters">
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 										<div class="form-group">
-											<label for="ConnectionName" class="col-form-label">Applying for</label><br />
-
+											<label for="ConnectionName" class="col-form-label">Applying for</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ConnectionName)</span><br />
 											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionName, "Water", new {@class="form-check-input", @id="water"})							@* @Html.Label("जल", new {@class="fom"}) *@
+												@Html.LabelFor(m=>m.ConnectionName, "जल", new {@class="form-check-label"})
+											</div>
+											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionName, "Sewage", new {@class="form-check-input", @id="sewage"})
+												@Html.LabelFor(m=>m.ConnectionName, "सीवर", new {@class="form-check-label"})
+
+											</div>
+											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionName, "Ferrule", new {@class="form-check-input", @id="ferrule"})			
+												@Html.LabelFor(m=>m.ConnectionName, "फैरूल शिफ्टिंग", new {@class="form-check-label"})
+											</div>
+												<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionName, "Pipe", new {@class="form-check-input", @id="Pipe"})				@Html.LabelFor(m=>m.ConnectionName, "पाइप बदलवाना", new {@class="form-check-label"})
+											</div>
+													<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionName, "WaterSewage", new {@class="form-check-input", @id="watersewage"})
+												@Html.LabelFor(m=>m.ConnectionName, "जल/ सीवर", new {@class="form-check-label"})
+											</div>
+											@* <div class="form-check form-check-inline">
 												<input class="form-check-input" type="radio" name="ConnectionName" id="water" value="Water">
 												<label class="form-check-label" for="water">जल</label>
 											</div>
@@ -57,22 +79,32 @@
 											<div class="form-check form-check-inline">
 												<input class="form-check-input" type="radio" name="ConnectionName" id="watersewage" value="watersewage">
 												<label class="form-check-label" for="watersewage">जल/ सीवर</label>
-											</div>
+											</div> *@
 										</div>
 									</div>
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" id="connectiondiv">
 										<div class="form-group">
-											<label for="ConnectionType" class="col-form-label">कनेक्शन</label><br />
+											<label for="ConnectionType" class="col-form-label">कनेक्शन</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ConnectionType)</span><br />
 
 											<div class="form-group">
+
 												<div class="form-check form-check-inline">
+													@Html.RadioButtonFor(m=>m.ConnectionType, "Fresh", new {@class="form-check-input", @id="FreshConnection"})
+													@Html.LabelFor(m=>m.ConnectionType, "नया", new {@class="form-check-label"})
+												</div>
+												<div class="form-check form-check-inline">
+													@Html.RadioButtonFor(m=>m.ConnectionType, "Extra", new {@class="form-check-input", @id="ExtraConnection"})
+													@Html.LabelFor(m=>m.ConnectionType, "एक्स्ट्रा", new {@class="form-check-label"})
+												</div>
+
+												@* <div class="form-check form-check-inline">
 													<input class="form-check-input" type="radio" name="ConnectionType" id="FreshConnection" value="Fresh">
 													<label class="form-check-label" for="FreshConnection">नया</label>
 												</div>
 												<div class="form-check form-check-inline">
 													<input class="form-check-input" type="radio" name="ConnectionType" id="ExtraConnection" value="Extra">
 													<label class="form-check-label" for="ExtraConnection">एक्स्ट्रा </label>
-												</div>
+												</div> *@
 											</div>
 
 										</div>
@@ -83,7 +115,7 @@
 
 										<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12" id="noofconnections">
 											<div class="form-group">
-												<label for="txtNoofConnections" class="col-form-label">No of Connections</label>
+											<label for="txtNoofConnections" class="col-form-label">No of Connections<span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.NoofConnections)</span></label>
 												@Html.TextBoxFor(m=>m.NoofConnections, new {@class="form-control", @id="txtNoofConnections", @onkeypress = "return /[0-9/]/i.test(event.key)"})
 
 											</div>
@@ -92,7 +124,7 @@
 										
 											<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12" id="connection1">
 												<div class="form-group">
-													<label for="txtPreviousConnection1" class="col-form-label">Previous Connection No1</label>
+											<label for="txtPreviousConnection1" class="col-form-label">Previous Connection No1<span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.PreviousConnection1)</span></label>
 													@Html.TextBoxFor(m=>m.PreviousConnection1, new {@class="form-control", @id="txtPreviousConnection1", @onkeypress = "return /[a-z0-9-//]/i.test(event.key)"})
 
 												</div>
@@ -100,7 +132,7 @@
 
 											<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12" id="connection2">
 												<div class="form-group">
-													<label for="txtPreviousConnection2" class="col-form-label">Previous Connection No2</label>
+											<label for="txtPreviousConnection2" class="col-form-label">Previous Connection No2<span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.PreviousConnection2)</span></label>
 													@Html.TextBoxFor(m=>m.PreviousConnection2, new {@class="form-control", @id="txtPreviousConnection2", @onkeypress = "return /[a-z0-9-//]/i.test(event.key)"})
 
 												</div>
@@ -115,21 +147,21 @@
 
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="txtApplicantName" class="col-form-label">आवेदक उपभोक्ता का नाम</label>
+											<label for="txtApplicantName" class="col-form-label">आवेदक उपभोक्ता का नाम<span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ApplicantName)</span></label>
 											@Html.TextBoxFor(m=>m.ApplicantName, new {@class="form-control", @id="txtApplicantName", @onkeypress = "return /[a-z /]/i.test(event.key)"})
 
 										</div>
 									</div>
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="txtFatherSpouseName" class="col-form-label">पिता/ जीवनसाथी का नाम</label>
+											<label for="txtFatherSpouseName" class="col-form-label">पिता/ जीवनसाथी का नाम<span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.FatherSpouseName)</span></label>
 											@Html.TextBoxFor(m=>m.FatherSpouseName, new {@class="form-control", @id="txtFatherSpouseName", @onkeypress = "return /[a-z /]/i.test(event.key)"})
 
 										</div>
 									</div>
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="inputAddress" class="col-form-label">पूरा पता</label>
+											<label for="inputAddress" class="col-form-label">पूरा पता</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ApplicantAddress)</span>
 
 											@Html.TextAreaFor(m=>m.ApplicantAddress, new {@class="form-control", @id="txtApplicantAddress", @style="resize:none;", @rows="2", @onkeypress = "return /[a-z0-9-/, /]/i.test(event.key)"})
 										</div>
@@ -164,24 +196,32 @@
 
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="LandLord" class="col-form-label">किरायेदार/ किरायेदारिनी</label><br />
-
+											<label for="LandLord" class="col-form-label">किरायेदार/ किरायेदारिनी</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.LandLord)</span><br />
 
 											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.LandLord, "Yes", new {@class="form-check-input", @id="TenantYes"})
+												@Html.LabelFor(m=>m.LandLord, "हाँ", new {@class="form-check-label"})
+											</div>
+											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.LandLord, "No", new {@class="form-check-input", @id="TenantNo"})
+												@Html.LabelFor(m=>m.LandLord, "नहीं", new {@class="form-check-label"})
+											</div>
+
+											@* <div class="form-check form-check-inline">
 												<input class="form-check-input" type="radio" name="LandLord" id="TenantYes" value="Yes">
 												<label class="form-check-label" for="TenantYes">हाँ</label>
 											</div>
 											<div class="form-check form-check-inline">
 												<input class="form-check-input" type="radio" name="LandLord" id="TenantNo" value="No">
 												<label class="form-check-label" for="TenantNo">नहीं</label>
-											</div>
+											</div> *@
 										</div>
 									</div>
 
 
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="txtBuildingOwnerName" class="col-form-label">भवन स्वामी/ स्वामिनी का नाम</label>
+											<label for="txtBuildingOwnerName" class="col-form-label">भवन स्वामी/ स्वामिनी का नाम</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.BuildingOwnerName)</span>
 											@Html.TextBoxFor(m=>m.BuildingOwnerName, new {@class="form-control", @id="txtBuildingOwnerName", @onkeypress = "return /[a-z /]/i.test(event.key)"})
 
 										</div>
@@ -189,7 +229,7 @@
 
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="txtPlumberName" class="col-form-label">अनुजा प्राप्त प्लाम्बर (उपभोक्ता द्वारा भरा जाये)</label>
+											<label for="txtPlumberName" class="col-form-label">अनुजा प्राप्त प्लाम्बर (उपभोक्ता द्वारा भरा जाये)</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.PlumberName)</span>
 											@Html.TextBoxFor(m=>m.PlumberName, new {@class="form-control", @id="txtPlumberName", @onkeypress = "return /[a-z /]/i.test(event.key)"})
 										</div>
 									</div>
@@ -209,7 +249,7 @@
 									</div> *@
 									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 										<div class="form-group">
-											<label for="txtPlumberMobile" class="col-form-label">प्लम्बर का मोबाइल नo</label>
+											<label for="txtPlumberMobile" class="col-form-label">प्लम्बर का मोबाइल नo</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.PlumberMobile)</span>
 											@Html.TextBoxFor(m=>m.PlumberMobile, new {@class="form-control", @id="txtPlumberMobile", @onkeypress = "return /[0-9/]/i.test(event.key)", @maxlength="10"})
 										</div>
 									</div>
@@ -233,7 +273,7 @@
 								<div class="row gutters">
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 										<div class="form-group">
-											<label for="HouseMap" class="col-form-label">घर का नक्शा अपलोड करें</label>
+											<label for="HouseMap" class="col-form-label">घर का नक्शा अपलोड करें</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.HouseMap)</span>
 											@Html.TextBoxFor(m=>m.HouseMap, new {@type="file", @class="form-control-sm", @id="HouseMap", @name="HouseMapFile"})
 										</div>
 									</div>
@@ -243,7 +283,7 @@
 								<div class="row gutters">
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 										<div class="form-group">
-											<label for="ElectricityBill" class="col-form-label">बिजली का बिल अपलोड करें</label>
+											<label for="ElectricityBill" class="col-form-label">बिजली का बिल अपलोड करें</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ElectricityBill)</span>
 											@Html.TextBoxFor(m=>m.ElectricityBill, new {@type="file", @class="form-control-sm", @id="ElectricityBill", @name="ElectricityBillFile"})
 										</div>
 									</div>
@@ -253,7 +293,7 @@
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 										<div class="form-group">
 
-											<label for="HouseTax" class="col-form-label">नगर निगम हाउस टैक्स असेसमेंट कॉपी अपलोड करें</label>
+											<label for="HouseTax" class="col-form-label">नगर निगम हाउस टैक्स असेसमेंट कॉपी अपलोड करें</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.HouseTax)</span>
 											@Html.TextBoxFor(m=>m.HouseTax, new {@type="file", @class="form-control-sm", @id="HouseTax", @name="HouseTaxFile"})
 
 
@@ -266,7 +306,7 @@
 									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 										<div class="form-group">
 
-											<label for="Registry" class="col-form-label">रजिस्ट्री कॉपी अपलोड करें</label>
+											<label for="Registry" class="col-form-label">रजिस्ट्री कॉपी अपलोड करें</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.Registry)</span>
 											@Html.TextBoxFor(m=>m.Registry, new {@type="file", @class="form-control-sm", @id="Registry", @name="RegistryFile"})
 
 
@@ -282,7 +322,7 @@
 
 				<div class="text-right">
 					<input class="btn btn-info" type="reset" value="रीसेट करें">
-					<button type="submit" id="submit2" name="submit2" class="btn btn-success">सेव करें</button>
+					<button type="submit" id="savebutton" name="submit2" class="btn btn-success">सेव करें</button>
 				</div>
 			}
 			
@@ -354,7 +394,15 @@
 		});
 
 		
+		var isFirstAccordianOpen = $('#toggleIconsCollapseOne').hasClass("show");
+		var isSecondAccordianOpen = $('#toggleIconsCollapseTwo').hasClass("show");
 
+		if (!isFirstAccordianOpen && !isSecondAccordianOpen) {
+			$('#savebutton').attr('type', 'button');
+		}
+		else {
+			$('#savebutton').attr('type', 'submit');
+		}
 
 	});
 

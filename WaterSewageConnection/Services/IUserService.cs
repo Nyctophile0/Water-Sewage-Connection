@@ -23,7 +23,7 @@ namespace WaterSewageConnection.Services
 
 			if (!string.IsNullOrEmpty(obj.userName) && !string.IsNullOrEmpty(obj.password))
 			{
-				if (await obj.getObjectAsync())
+				if (await obj.getUserDataAsync())
 				{
 					return true;
 				}
