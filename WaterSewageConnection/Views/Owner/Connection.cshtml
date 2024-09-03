@@ -4,6 +4,15 @@
     ViewData["Title"] = "Connection";
     Layout = "~/Views/Shared/_OwnerLayout.cshtml";
 }
+
+<style>
+	.toast-top-right {
+		top: 20px;
+		/* left: 50%;*/
+		/*margin: 0 0 0 -150px;*/
+	}
+</style>
+
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/jquery.validate.js"></script>
 <script src="~/js/jquery.validate.min.js"></script>
@@ -30,7 +39,7 @@
 				<div class="accordion toggle-icons" id="toggleIcons">
 					<div class="accordion-container">
 						<div class="accordion-header" id="toggleIconsOne">
-							<a href="#" class="" data-toggle="collapse" data-target="#toggleIconsCollapseOne" aria-expanded="true" aria-controls="toggleIconsCollapseOne">
+							<a href="#" class="" data-toggle="collapse" data-target="#toggleIconsCollapseOne" aria-expanded="true" aria-controls="toggleIconsCollapseOne" id="accordian1">
 								<i class="icon icon-border_color"></i> पुष्टि करें
 							</a>
 						</div>
@@ -264,7 +273,7 @@
 
 					<div class="accordion-container">
 						<div class="accordion-header" id="toggleIconsTwo">
-							<a href="#" class="" data-toggle="collapse" data-target="#toggleIconsCollapseTwo" aria-expanded="true" aria-controls="toggleIconsCollapseTwo">
+							<a href="#" class="" data-toggle="collapse" data-target="#toggleIconsCollapseTwo" aria-expanded="true" aria-controls="toggleIconsCollapseTwo" id="accordian2">
 								<i class="icon icon-attach_file"></i> डाक्यूमेंट्स अपलोड करें
 							</a>
 						</div>
@@ -321,7 +330,9 @@
 
 
 				<div class="text-right">
-					<input class="btn btn-info" type="reset" value="रीसेट करें">
+					@* <input class="btn btn-info" type="reset" value="रीसेट करें"> *@
+					@*reset thre form*@
+					<input type="button" class="btn btn-info" onclick="this.form.reset();" value="रीसेट करें">
 					<button type="submit" id="savebutton" name="submit2" class="btn btn-success">सेव करें</button>
 				</div>
 			}
@@ -341,6 +352,49 @@
 	$(document).ready(function () {
 		$('#ownerdashboard').removeClass("active-page");
 		$('#connection').addClass("active-page");
+
+
+		var msg = '@TempData["errormsg"]';
+
+		if (msg == "Success") {
+
+			toastr.options = {
+				"closeButton": true,
+				"debug": false,
+				"newestOnTop": false,
+				"progressBar": true,
+				"positionClass": "toast-top-right",
+				"preventDuplicates": false,
+				"onclick": null,
+
+				"timeOut": 5000,
+				"showEasing": "swing",
+				"hideEasing": "linear",
+				"showMethod": "show",
+				"hideMethod": "hide"
+			}
+			toastr.success('Connection Request Sent!');
+		}
+		else if (msg != "" || msg == "Error") {
+
+			toastr.options = {
+				"closeButton": true,
+				"debug": false,
+				"newestOnTop": false,
+				"progressBar": true,
+				"positionClass": "toast-top-right",
+				"preventDuplicates": false,
+				"onclick": null,
+
+				"timeOut": 5000,
+				"showEasing": "swing",
+				"hideEasing": "linear",
+				"showMethod": "show",
+				"hideMethod": "hide"
+			}
+			toastr.error('Error!');
+		}
+		//AccordiansStatus();
 
 		bindZone('zoneddl', -1);
 		bindWard('wardddl', -1);
@@ -393,18 +447,34 @@
 			}
 		});
 
+		// $('#accordian1, #accordian2').on('click', function () {
+		// 	//debugger;
+		// 	AccordiansStatus();
+		// });
 		
-		var isFirstAccordianOpen = $('#toggleIconsCollapseOne').hasClass("show");
-		var isSecondAccordianOpen = $('#toggleIconsCollapseTwo').hasClass("show");
-
-		if (!isFirstAccordianOpen && !isSecondAccordianOpen) {
-			$('#savebutton').attr('type', 'button');
-		}
-		else {
-			$('#savebutton').attr('type', 'submit');
-		}
+		
 
 	});
+
+	// function AccordiansStatus(){
+	// 	var isFirstAccordianOpen = $('#toggleIconsCollapseOne').hasClass("show");
+	// 	var isSecondAccordianOpen = $('#toggleIconsCollapseTwo').hasClass("show");
+
+	// 	if (isFirstAccordianOpen && isSecondAccordianOpen) {
+	// 		//$('#savebutton').attr('type', 'button');
+	// 		$('#savebutton').removeAttr('disabled');
+
+	// 	}
+	// 	else if (!isFirstAccordianOpen || !isSecondAccordianOpen) {
+	// 		$('#savebutton').attr('disabled', 'disabled');
+	// 		//$('#savebutton').attr('type', 'submit');
+	// 	}
+	// 	else
+	// 	{
+	// 		$('#savebutton').removeAttr('disabled');
+
+	// 	}
+	// }
 
 	function bindZone(id, defaultSelectionValues) {
 

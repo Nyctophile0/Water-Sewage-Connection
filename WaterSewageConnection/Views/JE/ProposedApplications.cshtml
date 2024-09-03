@@ -1,10 +1,19 @@
-﻿
+﻿@model ViewModel
+
 @{
     ViewData["Title"] = "ProposedApplications";
     Layout = "~/Views/Shared/_JELayout.cshtml";
 }
 
+@{
+	System.Data.DataTable dt = new System.Data.DataTable();
+	dt = Model.ConnectionDataset.Tables[0];
+}
+
 <script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.validate.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.js"></script>
 
 <style>
 	.inline-input {
@@ -55,7 +64,7 @@
 													<th>Proposed Applications</th>
 												</tr>
 											</thead>
-											<tbody>
+@* 											<tbody>
 												<tr>
 													<td>
 														<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
@@ -111,6 +120,37 @@
 														</a>
 													</td>
 												</tr>
+											</tbody> *@
+											<tbody>
+
+												@if (dt != null && dt.Rows.Count > 0)
+												{
+													@for (int i = 0; i < dt.Rows.Count; i++)
+													{
+														<tr>
+															<td>
+																<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+
+																	<div class="hospital-location">
+																		<div class="hospital-title">Application - 1</div>
+																		<div class="hospital-address">
+																			Ward: @dt.Rows[i]["ZoneName"], Mohalla: @dt.Rows[i]["MohallaName"]
+																		</div>
+																		<div class="">
+																			<span class="badge badge-pill badge-secondary">Pending</span>
+																			<span class="badge badge-pill badge-info">@dt.Rows[i]["ConnectionType"]</span>
+																			<span class="badge badge-pill badge-info">@dt.Rows[i]["ConnectionName"]</span>
+																		</div>
+
+																	</div>
+																</a>
+															</td>
+														</tr>
+													}
+
+												}
+
+												
 											</tbody>
 										</table>
 									</div>
@@ -129,12 +169,207 @@
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="myExtraLargeModalLabel">पुष्टि करें</h5>
+				<h5 class="modal-title" id="myExtraLargeModalLabel"><i class="icon icon-border_color"></i> &nbsp;पुष्टि करें</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
+
+
+				<div class="accordion toggle-icons" id="toggleIcons">
+					<div class="accordion-container">
+						<div class="accordion-header" id="toggleIconsOne">
+							<a href="#" class="show" data-toggle="collapse" data-target="#toggleIconsCollapseOne" aria-expanded="true" aria-controls="toggleIconsCollapseOne" id="accordian1">
+								<i class="icon icon-file-text"></i> कनेक्शन का विवरण (उपभोक्ता द्वारा भरा गया)
+							</a>
+						</div>
+						<div id="toggleIconsCollapseOne" class="collapse show" aria-labelledby="toggleIconsOne" data-parent="">
+							<div class="accordion-body">
+								<div class="row gutters">
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="ConnectionName" class="col-form-label">Applying for</label><br />
+											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionModel.ConnectionName, "Water", new {@class="form-check-input", @id="water", @readonly="true", @checked="true"})							@* @Html.Label("जल", new {@class="fom"}) *@
+												@Html.LabelFor(m=>m.ConnectionModel.ConnectionName, "जल", new {@class="form-check-label"})
+											</div>
+											
+										</div>
+									</div>
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-12" id="connectiondiv">
+										<div class="form-group">
+											<label for="ConnectionType" class="col-form-label">कनेक्शन</label><br />
+
+											<div class="form-group">
+
+												<div class="form-check form-check-inline">
+													@Html.RadioButtonFor(m=>m.ConnectionModel.ConnectionType, "Fresh", new {@class="form-check-input", @id="FreshConnection",@readonly="true", @checked="true"})
+													@Html.LabelFor(m=>m.ConnectionModel.ConnectionType, "नया", new {@class="form-check-label"})
+												</div>
+												
+												
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12" id="noofconnections">
+										<div class="form-group">
+											<label for="txtNoofConnections" class="col-form-label">No of Connections</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.NoofConnections, new {@class="form-control", @id="txtNoofConnections", @onkeypress = "return /[0-9/]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12" id="connection1">
+										<div class="form-group">
+											<label for="txtPreviousConnection1" class="col-form-label">Previous Connection No1</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.PreviousConnection1, new {@class="form-control", @id="txtPreviousConnection1", @onkeypress = "return /[a-z0-9-//]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12" id="connection2">
+										<div class="form-group">
+											<label for="txtPreviousConnection2" class="col-form-label">Previous Connection No2</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.PreviousConnection2, new {@class="form-control", @id="txtPreviousConnection2", @onkeypress = "return /[a-z0-9-//]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+								
+
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="txtApplicantName" class="col-form-label">आवेदक उपभोक्ता का नाम</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.ApplicantName, new {@class="form-control", @id="txtApplicantName", @onkeypress = "return /[a-z /]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="txtFatherSpouseName" class="col-form-label">पिता/ जीवनसाथी का नाम</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.FatherSpouseName, new {@class="form-control", @id="txtFatherSpouseName", @onkeypress = "return /[a-z /]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="inputAddress" class="col-form-label">पूरा पता</label>
+
+											@Html.TextAreaFor(m=>m.ConnectionModel.ApplicantAddress, new {@class="form-control", @id="txtApplicantAddress", @style="resize:none;", @rows="2", @onkeypress = "return /[a-z0-9-/, /]/i.test(event.key)", @readonly="true"})
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="zoneddl" class="col-form-label">ज़ोन</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.ZoneName, new {@class="form-control", @id="txtApplicantAddress", @readonly="true"})
+											
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="wardddl" class="col-form-label">वार्ड</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.WardName, new {@class="form-control", @id="txtApplicantAddress", @readonly="true"})
+											
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="mohalladdl" class="col-form-label">मोहल्ला</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.MohallaName, new {@class="form-control", @id="txtApplicantAddress",  @readonly="true"})
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="LandLord" class="col-form-label">किरायेदार/ किरायेदारिनी</label><br />
+
+											<div class="form-check form-check-inline">
+												@Html.RadioButtonFor(m=>m.ConnectionModel.LandLord, "Yes", new {@class="form-check-input", @id="TenantYes",@readonly="true", @checked=true})
+												@Html.LabelFor(m=>m.ConnectionModel.LandLord, "हाँ", new {@class="form-check-label"})
+											</div>
+											
+											
+										</div>
+									</div>
+
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="txtBuildingOwnerName" class="col-form-label">भवन स्वामी/ स्वामिनी का नाम</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.BuildingOwnerName, new {@class="form-control", @id="txtBuildingOwnerName", @onkeypress = "return /[a-z /]/i.test(event.key)", @readonly="true"})
+
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="txtPlumberName" class="col-form-label">अनुजा प्राप्त प्लाम्बर (उपभोक्ता द्वारा भरा जाये)</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.PlumberName, new {@class="form-control", @id="txtPlumberName", @onkeypress = "return /[a-z /]/i.test(event.key)", @readonly="true"})
+										</div>
+									</div>
+
+									
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+										<div class="form-group">
+											<label for="txtPlumberMobile" class="col-form-label">प्लम्बर का मोबाइल नo</label>
+											@Html.TextBoxFor(m=>m.ConnectionModel.PlumberMobile, new {@class="form-control", @id="txtPlumberMobile", @onkeypress = "return /[0-9/]/i.test(event.key)", @maxlength="10", @readonly="true"})
+										</div>
+									</div>
+
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+										<div class="form-group">
+											<label for="HouseMap" class="col-form-label">घर का नक्शा</label><br />
+											@Html.TextBoxFor(m=>m.ConnectionModel.HouseMap, new {@type="file", @class="form-control-sm", @id="HouseMap", @name="HouseMapFile", @readonly="true"})
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+										<div class="form-group">
+											<label for="ElectricityBill" class="col-form-label">बिजली का बिल</label><br />
+											@Html.TextBoxFor(m=>m.ConnectionModel.ElectricityBill, new {@type="file", @class="form-control-sm", @id="ElectricityBill", @name="ElectricityBillFile"})
+										</div>
+									</div>
+
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+										<div class="form-group">
+
+											<label for="HouseTax" class="col-form-label">नगर निगम हाउस टैक्स असेसमेंट कॉपी</label><br />
+											@Html.TextBoxFor(m=>m.ConnectionModel.HouseTax, new {@type="file", @class="form-control-sm", @id="HouseTax", @name="HouseTaxFile"})
+
+
+										</div>
+									</div>
+
+									<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+										<div class="form-group">
+
+											<label for="Registry" class="col-form-label">रजिस्ट्री कॉपी</label><br />
+											@Html.TextBoxFor(m=>m.ConnectionModel.Registry, new {@type="file", @class="form-control-sm", @id="Registry", @name="RegistryFile"})
+
+
+										</div>
+									</div>
+
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+					</div>
+
+					
+				</div>
+
+				<br />
 				<p>
 					वर्णित भवन मुस्यष्ट पर जलकल विभाग के निम्न अवशेप दे कोई अवशेष देय नहीं है।
 				</p>

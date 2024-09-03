@@ -1,10 +1,12 @@
-﻿using WaterSewageConnection.Models;
+﻿using System.Data;
+using WaterSewageConnection.Models;
 
 namespace WaterSewageConnection.Services
 {
 	public interface IConnectionService
 	{
 		Task<bool> AddConnection(ConnectionDetails obj);
+		Task<DataSet> GetAllConnections();
 	}
 
 	public class ConnectionService : IConnectionService
@@ -26,6 +28,15 @@ namespace WaterSewageConnection.Services
 				return true;
 
 			return false;
+		}
+
+		public async Task<DataSet> GetAllConnections()
+		{
+			ConnectionDetails obj = new ConnectionDetails();
+
+			obj.Action = "selectallConnections";
+
+			return await obj.getDataSetAsync();
 		}
 	}
 }

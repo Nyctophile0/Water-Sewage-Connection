@@ -147,6 +147,9 @@ namespace WaterSewageConnection.Models
 				cmd.Parameters.AddWithValue("@HouseTax", this.HouseTaxPath);
 				cmd.Parameters.AddWithValue("@Registry", this.RegistryPath);
 				cmd.Parameters.AddWithValue("@guid", this.guid);
+				cmd.Parameters.AddWithValue("@NoofConnections", this.NoofConnections);
+				cmd.Parameters.AddWithValue("@PreviousConnection1", this.PreviousConnection1);
+				cmd.Parameters.AddWithValue("@PreviousConnection2", this.PreviousConnection2);
 
 				cmd.Parameters.AddWithValue("@Action", this.Action);
 				cmd.Parameters.Add("@msg", System.Data.SqlDbType.NVarChar, 250);
@@ -202,5 +205,12 @@ namespace WaterSewageConnection.Models
 			}
 		}
 
+
+	}
+
+	public class ViewModel
+	{
+		public DataSet ConnectionDataset { get; set; }
+		public ConnectionDetails ConnectionModel { get; set; }
 	}
 }

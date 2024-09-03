@@ -118,6 +118,7 @@ namespace WaterSewageConnection.Controllers
 				msg = await _connectionService.AddConnection(obj);
 				if (!msg)
 					TempData["errormsg"] = "Error";
+				TempData["errormsg"] = "Success";
 
 				return RedirectToAction("Connection");
 			}

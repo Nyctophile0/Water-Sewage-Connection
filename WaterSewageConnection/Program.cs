@@ -18,7 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 // The builder object has the Services() method which can be used to add services to the dependency injection container.
 // Add services to the container.
 // The AddControllersWithViews() is an extension method that register types needed for MVC application (model, view, controller) to the dependency injection. It includes all the necessary services and configurations for MVC So that your application can use MVC architecture.
-builder.Services.AddControllersWithViews();
+// Addrazorruntimecompliation() allows changes reflection on page reload in razor views.
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 //Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
