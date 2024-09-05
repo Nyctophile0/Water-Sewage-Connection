@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
+// Conventional Middleware class
+
 namespace WaterSewageConnection.Middleware
 {
-	// You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
+	// install the Microsoft.AspNetCore.Http.Abstractions package into project
 	// intercepts incoming requests and outgoing responses
 	public class TokenMiddleware
 	{
