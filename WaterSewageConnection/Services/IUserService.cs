@@ -6,6 +6,7 @@ namespace WaterSewageConnection.Services
 	{
 		Task<bool> UserAuthentication(Users obj);
 		Task<Users> GetUserRole(Users obj);
+		
 	}
 
 	public class UserService : IUserService
@@ -44,5 +45,7 @@ namespace WaterSewageConnection.Services
 			}
 			return obj;
 		}
+
+		
 	}
 }

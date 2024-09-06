@@ -16,7 +16,8 @@
 		************ -->
 	<!-- Bootstrap css -->
 	<link rel="stylesheet" href="~/css/bootstrap.min.css">
-
+	<!-- Toastr -->
+	<link href="~/toastr/toastr.css" rel="stylesheet" />
 	<!-- Icomoon Font Icons css -->
 	<link rel="stylesheet" href="~/fonts/style.css">
 	<link href="~/css/main.css" rel="stylesheet" />
@@ -156,6 +157,14 @@
 						</a>
 
 					</li>
+					<li class="nav-item ">
+						<a class="nav-link " href="/JE/PendingChargesApplications" id="JEpendingchargesproposedapplications">
+							<i class="icon-edit1 nav-icon"></i>
+
+							लंबित शुल्क आवेदनों का विवरण देखें
+						</a>
+
+					</li>
 
 				</ul>
 			</div>
@@ -212,8 +221,8 @@
 	<script src="~/vendor/rating/raty.js"></script>
 	<script src="~/vendor/rating/raty-custom.js"></script>
 
-	<!-- Advance datatable-->
-	<script src="~/vendor/advance-datatable/js/jquery-3.7.1.js"></script>
+    <!-- Advance datatable-->
+@* 	<script src="~/vendor/advance-datatable/js/jquery-3.7.1.js"></script> *@
 	<script src="~/vendor/advance-datatable/js/dataTables.js"></script>
 	<script src="~/vendor/advance-datatable/js/dataTables.buttons.js"></script>
 	<script src="~/vendor/advance-datatable/js/buttons.dataTables.js"></script>
@@ -247,7 +256,9 @@
 					// 	'colvis'
 					// ]
 				}
-			}
+			},
+			// disable automatic sorting
+			order : []
 		});
 
 	</script>

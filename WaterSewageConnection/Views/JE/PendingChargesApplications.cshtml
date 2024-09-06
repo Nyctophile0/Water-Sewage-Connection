@@ -1,7 +1,7 @@
 ﻿@model ViewModel
 
 @{
-    ViewData["Title"] = "ProposedApplications";
+    ViewData["Title"] = "PendingChargesApplications";
     Layout = "~/Views/Shared/_JELayout.cshtml";
 }
 
@@ -26,7 +26,7 @@
 		border-bottom: 1.5px solid #ccc;
 		outline: none;
 	}
-	
+
 	bold {
 		font-weight: bold;
 	}
@@ -35,7 +35,7 @@
 <div class="page-header">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/JE/Dashboard">होम</a></li>
-		<li class="breadcrumb-item active">आवेदनों का विवरण देखें</li>
+		<li class="breadcrumb-item active">लंबित शुल्क आवेदनों का विवरण देखें</li>
 	</ol>
 
 </div>
@@ -47,84 +47,84 @@
 	<!-- Row start -->
 	<div class="row gutters">
 		<div class="col-xl-12">
-			
+
 
 			<div class="card plain">
 				<div class="card-body">
 					<!-- Row start -->
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							
+
 							<div class="hotelMapScroll">
 								<div class="hospital-maps-container">
-									
-									
+
+
 									<div class="table-responsive">
 										<table style="width: 100%;" id="scr-vtr-dynamic" class="example">
 
 											<thead>
 												<tr>
 													@*<th>क्रमांक</th>*@
-													<th>कनेक्शन के लिए प्रस्तावित आवेदन</th>
-													
+													<th>प्रस्तावित लंबित शुल्क आवेदन</th>
+
 												</tr>
 											</thead>
-@* 											<tbody>
-												<tr>
-													<td>
-														<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+											@* 											<tbody>
+											<tr>
+											<td>
+											<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
 
-															<div class="hospital-location">
-																<div class="hospital-title">Application - 1</div>
-																<div class="hospital-address">
-																	Ward- ward1, Mohalla- mohalla1
-																</div>
-																<div class="">
-																	<span class="badge badge-pill badge-secondary">Pending</span>
-																	<span class="badge badge-pill badge-info">Extra Connection</span>
-																	<span class="badge badge-pill badge-info">Pipe Shifting</span>
-																</div>
+											<div class="hospital-location">
+											<div class="hospital-title">Application - 1</div>
+											<div class="hospital-address">
+											Ward- ward1, Mohalla- mohalla1
+											</div>
+											<div class="">
+											<span class="badge badge-pill badge-secondary">Pending</span>
+											<span class="badge badge-pill badge-info">Extra Connection</span>
+											<span class="badge badge-pill badge-info">Pipe Shifting</span>
+											</div>
 
-															</div>
-														</a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
-															<div class="hospital-location">
-																<div class="hospital-title">Application - 2</div>
-																<div class="hospital-address">
-																	Ward- ward2, Mohalla- mohalla2
-																</div>
-																<div class="">
-																	<span class="badge badge-pill badge-secondary">Pending</span>
-																	<span class="badge badge-pill badge-info">Fresh Connection</span>
-																	<span class="badge badge-pill badge-info">Water Connection</span>
-																</div>
+											</div>
+											</a>
+											</td>
+											</tr>
+											<tr>
+											<td>
+											<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+											<div class="hospital-location">
+											<div class="hospital-title">Application - 2</div>
+											<div class="hospital-address">
+											Ward- ward2, Mohalla- mohalla2
+											</div>
+											<div class="">
+											<span class="badge badge-pill badge-secondary">Pending</span>
+											<span class="badge badge-pill badge-info">Fresh Connection</span>
+											<span class="badge badge-pill badge-info">Water Connection</span>
+											</div>
 
-															</div>
-														</a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
-															<div class="hospital-location">
-																<div class="hospital-title">Application - 3</div>
-																<div class="hospital-address">
-																	Ward- ward3, Mohalla- mohalla3
-																</div>
-																<div class="">
-																	<span class="badge badge-pill badge-secondary">Pending</span>
-																	<span class="badge badge-pill badge-info">Extra Connection</span>
-																	<span class="badge badge-pill badge-info">Sewage Connection</span>
-																</div>
+											</div>
+											</a>
+											</td>
+											</tr>
+											<tr>
+											<td>
+											<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target=".bd-example-modal-xl">
+											<div class="hospital-location">
+											<div class="hospital-title">Application - 3</div>
+											<div class="hospital-address">
+											Ward- ward3, Mohalla- mohalla3
+											</div>
+											<div class="">
+											<span class="badge badge-pill badge-secondary">Pending</span>
+											<span class="badge badge-pill badge-info">Extra Connection</span>
+											<span class="badge badge-pill badge-info">Sewage Connection</span>
+											</div>
 
-															</div>
-														</a>
-													</td>
-												</tr>
+											</div>
+											</a>
+											</td>
+											</tr>
 											</tbody> *@
 											<tbody>
 
@@ -133,11 +133,11 @@
 													@for (int i = 0; i < dt.Rows.Count; i++)
 													{
 														string dynamicid = ".modal" + (i + 1);
-														
+
 														<tr>
-														@*<td>
-														@(i+1)
-														</td>*@
+															@*<td>
+													@(i+1)
+													</td>*@
 
 															<td>
 																<a href="javascript:void(0)" class="hospital-listing" data-toggle="modal" data-target="@dynamicid">
@@ -161,11 +161,11 @@
 
 												}
 
-												
+
 											</tbody>
 										</table>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
@@ -192,11 +192,11 @@
 						</button>
 					</div>
 
-					<form asp-action="JEPendingChargesUpdation" method="post">
+					<form asp-action="#" method="post">
 						<div class="modal-body">
 
 							<input type="hidden" asp-for="ConnectionModel.guid" value="@dt.Rows[i]["guid"]">
-							
+
 							<div class="accordion toggle-icons" id="toggleIcons">
 								<div class="accordion-container">
 									<div class="accordion-header" id="toggleIconsOne">
@@ -240,7 +240,7 @@
 													</div>
 												}
 
-												
+
 
 												@if (@dt.Rows[i]["ConnectionType"].ToString() == "एक्स्ट्रा कनेक्शन")
 												{
@@ -471,11 +471,11 @@
 							</div>
 
 							<br />
-							
+
 
 							<p>
 								<div class="form-check form-check-inline">
-									वर्णित भवन भूखंड पर जल कल विभाग के निम्न अवशेप &nbsp;<span> @Html.RadioButtonFor(m=>m.ConnectionModel.IsPendingCharges, "1", new {@class="form-check-input", @id="PendingChargesYes"})देय हैं &nbsp;</span> <span> @Html.RadioButtonFor(m=>m.ConnectionModel.IsPendingCharges, "0", new {@class="form-check-input", @id="PendingChargesNo"})कोई अवशेष देय नहीं है।</span> <span asp-validation-for="ConnectionModel.IsPendingCharges" class="text-danger" style="font-weight:bold;"> </span>
+									वर्णित भवन भूखंड पर जल कल विभाग के निम्न अवशेप &nbsp;<span> <input type="radio" class="form-check-input" checked readonly disabled> @dt.Rows[i]["isPendingCharges"]</span>
 								</div>
 							</p>
 							<br />
@@ -485,8 +485,9 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
 										<label asp-for="ConnectionModel.PendingWaterTax">जल कर </label>
-										<input asp-for="ConnectionModel.PendingWaterTax" class="form-control inline-input" , id="txtPendingWaterTax" onkeypress="return /[0-9.]/i.test(event.key)">
-										<span asp-validation-for="ConnectionModel.PendingWaterTax" class="text-danger" style="font-weight:bold;"> </span>
+										<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["PendingWaterTax"]">
+								
+										
 									</div>
 								</div>
 							</div>
@@ -495,8 +496,9 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
 										<label asp-for="ConnectionModel.PendingSewageTax">सीवर कर </label>
-										<input asp-for="ConnectionModel.PendingSewageTax" class="form-control inline-input" , id="txtPendingSewageTax" onkeypress="return /[0-9.]/i.test(event.key)">
-										<span asp-validation-for="ConnectionModel.PendingSewageTax" class="text-danger" style="font-weight:bold;"> </span>
+										<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["PendingSewageTax"]">
+										
+										
 									</div>
 								</div>
 							</div>
@@ -505,8 +507,9 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
 										<label asp-for="ConnectionModel.PendingWaterPrice">जल मुल्य </label>
-										<input asp-for="ConnectionModel.PendingWaterPrice" class="form-control inline-input" , id="txtPendingWaterPrice" onkeypress="return /[0-9.]/i.test(event.key)">
-										<span asp-validation-for="ConnectionModel.PendingWaterPrice" class="text-danger" style="font-weight:bold;"> </span>
+										<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["PendingWaterPrice"]">
+										
+										
 									</div>
 								</div>
 							</div>
@@ -515,8 +518,8 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
 										<label asp-for="ConnectionModel.PendingSewageCharges">सीवर चार्जेज </label>
-										<input asp-for="ConnectionModel.PendingSewageCharges" class="form-control inline-input" , id="txtPendingSewageCharges" onkeypress="return /[0-9.]/i.test(event.key)">
-										<span asp-validation-for="ConnectionModel.PendingSewageCharges" class="text-danger" style="font-weight:bold;"> </span>
+										<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["PendingSewageCharges"]">
+										
 									</div>
 								</div>
 							</div>
@@ -525,8 +528,8 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
 										<label asp-for="ConnectionModel.PendingOtherCharges">अन्य </label>
-										<input asp-for="ConnectionModel.PendingOtherCharges" class="form-control inline-input" , id="txtPendingOtherCharges" onkeypress="return /[0-9.]/i.test(event.key)">
-										<span asp-validation-for="ConnectionModel.PendingOtherCharges" class="text-danger" style="font-weight:bold;"> </span>
+										<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["PendingOtherCharges"]">
+										
 									</div>
 								</div>
 							</div>
@@ -534,7 +537,10 @@
 							<div class="row gutters">
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 									<div class="form-group">
-										<label asp-for="ConnectionModel.ConnectionInBuilding">उक्त भवन में यह <span><input asp-for="ConnectionModel.ConnectionInBuilding" class="form-control inline-input" , id="txtConnectionInBuilding" onkeypress="return /[1-9.]/i.test(event.key)"></span> वाँ जल संयोजन होगा।</label> <span asp-validation-for="ConnectionModel.ConnectionInBuilding" class="text-danger" style="font-weight:bold;"> </span>
+										<label asp-for="ConnectionModel.ConnectionInBuilding">उक्त भवन में यह <span>
+												<input type="text" class="form-control inline-input" disabled value="@dt.Rows[i]["ConnectionInBuilding"]">
+											</span> वाँ जल संयोजन होगा।
+										</label> 
 									</div>
 								</div>
 							</div>
@@ -542,11 +548,11 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-lighten" data-dismiss="modal">पीछे जाए</button>
-							<input type="submit" class="btn btn-primary" value="सेव करें">
+							<input type="submit" class="btn btn-primary" value="अपडेट करें">
 						</div>
 					</form>
 
-					
+
 				</div>
 			</div>
 		</div>
@@ -559,9 +565,9 @@
 
 	$(document).ready(function () {
 		$('#JEdashboard').removeClass("active-page");
-		$('#JEproposedconnections').addClass("active-page");
+		$('#JEpendingchargesproposedapplications').addClass("active-page");
 
-		
+
 
 	});
 

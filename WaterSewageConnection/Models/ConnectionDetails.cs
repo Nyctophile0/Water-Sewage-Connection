@@ -7,57 +7,74 @@ namespace WaterSewageConnection.Models
 {
 	public class ConnectionDetails : ConClass
 	{
-		public string ConnectionId { get; set; }
+		public string? Role { get; set; }
+		public string? ConnectionId { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ConnectionName { get; set; }
+		public string? ConnectionName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ConnectionType { get; set; }
+		public string? ConnectionType { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ApplicantName { get; set; }
+		public string? ApplicantName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ApplicantAddress { get; set; }
+		public string? ApplicantAddress { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string FatherSpouseName { get; set; }
+		public string? FatherSpouseName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ZoneId { get; set; }
+		public string? ZoneId { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string ZoneName { get; set; }
+		public string? ZoneName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string WardId { get; set; }
-		public string WardName { get; set; }
+		public string? WardId { get; set; }
+		public string? WardName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string MohallaId { get; set; }
-		public string MohallaName { get; set; }
+		public string? MohallaId { get; set; }
+		public string? MohallaName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string LandLord { get; set; }
+		public string? LandLord { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string BuildingOwnerName { get; set; }
+		public string? BuildingOwnerName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string PlumberName { get; set; }
+		public string? PlumberName { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string PlumberMobile { get; set; }
+		public string? PlumberMobile { get; set; }
 		[Required(ErrorMessage = "*")]
-		public IFormFile HouseMap { get; set; }
-		public string HouseMapPath { get; set; }
+		public IFormFile? HouseMap { get; set; }
+		public string? HouseMapPath { get; set; }
 		[Required(ErrorMessage = "*")]
-		public IFormFile ElectricityBill { get; set; }
-		public string ElectricityBillPath { get; set; }
+		public IFormFile? ElectricityBill { get; set; }
+		public string? ElectricityBillPath { get; set; }
 		[Required(ErrorMessage = "*")]
-		public IFormFile HouseTax { get; set; }
-		public string HouseTaxPath { get; set; }
+		public IFormFile? HouseTax { get; set; }
+		public string? HouseTaxPath { get; set; }
 		[Required(ErrorMessage = "*")]
-		public IFormFile Registry { get; set; }
-		public string RegistryPath { get; set; }
-		public string filepath { get; set; }
-		public string filetype { get; set; }
-		public string guid { get; set; }
+		public IFormFile? Registry { get; set; }
+		public string? RegistryPath { get; set; }
+		public string? filepath { get; set; }
+		public string? filetype { get; set; }
+		public string? guid { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string PreviousConnection1 { get; set; }
+		public string? PreviousConnection1 { get; set; }
 		[Required(ErrorMessage = "*")]
-		public string PreviousConnection2 { get; set; }
+		public string? PreviousConnection2 { get; set; }
 		[Required(ErrorMessage = "*")]
-		public int NoofConnections { get; set; }
-		public string Action { get; set; }
+		public int? NoofConnections { get; set; }
+		public string? Action { get; set; }
+
+		// JE
+		[Required(ErrorMessage = "*")]
+		public string? IsPendingCharges { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? PendingWaterTax { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? PendingSewageTax { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? PendingWaterPrice { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? PendingSewageCharges { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? PendingOtherCharges { get; set; }
+		[Required(ErrorMessage = "*")]
+		public decimal? ConnectionInBuilding { get; set; }
 
 
 
@@ -79,6 +96,7 @@ namespace WaterSewageConnection.Models
 				da.SelectCommand.Parameters.AddWithValue("@MohallaId", this.MohallaId);
 				da.SelectCommand.Parameters.AddWithValue("@Action", this.Action);
 				da.SelectCommand.Parameters.AddWithValue("@guid", this.guid);
+				da.SelectCommand.Parameters.AddWithValue("@Role", this.Role);
 
 				DataSet ds = new DataSet();
 				await Task.Run(() => da.Fill(ds));
@@ -124,7 +142,7 @@ namespace WaterSewageConnection.Models
 
 		public async Task<string> saveAsync()
 		{
-			string message = "";
+			string message = string.Empty;
 			string connectionString = ConClass.ConnectionString;
 			using (SqlConnection con = new SqlConnection(connectionString))
 			{
@@ -150,6 +168,14 @@ namespace WaterSewageConnection.Models
 				cmd.Parameters.AddWithValue("@NoofConnections", this.NoofConnections);
 				cmd.Parameters.AddWithValue("@PreviousConnection1", this.PreviousConnection1);
 				cmd.Parameters.AddWithValue("@PreviousConnection2", this.PreviousConnection2);
+				cmd.Parameters.AddWithValue("@Role", this.Role);
+				cmd.Parameters.AddWithValue("@IsPendingCharges", this.IsPendingCharges);
+				cmd.Parameters.AddWithValue("@PendingWaterTax", this.PendingWaterTax);
+				cmd.Parameters.AddWithValue("@PendingSewageTax", this.PendingSewageTax);
+				cmd.Parameters.AddWithValue("@PendingWaterPrice", this.PendingWaterPrice);
+				cmd.Parameters.AddWithValue("@PendingSewageCharges", this.PendingSewageCharges);
+				cmd.Parameters.AddWithValue("@PendingOtherCharges", this.PendingOtherCharges);
+				cmd.Parameters.AddWithValue("@ConnectionInBuilding", this.ConnectionInBuilding);
 
 				cmd.Parameters.AddWithValue("@Action", this.Action);
 				cmd.Parameters.Add("@msg", System.Data.SqlDbType.NVarChar, 250);
@@ -158,7 +184,7 @@ namespace WaterSewageConnection.Models
 				con.Open();
 				await Task.Run(()=>cmd.ExecuteNonQuery());
 
-				message = cmd.Parameters["@msg"].Value.ToString();
+				message = cmd.Parameters["@msg"].Value.ToString() ?? string.Empty;
 
 				return message;
 			}
@@ -210,7 +236,7 @@ namespace WaterSewageConnection.Models
 
 	public class ViewModel
 	{
-		public DataSet ConnectionDataset { get; set; }
-		public ConnectionDetails ConnectionModel { get; set; }
+		public DataSet? ConnectionDataset { get; set; }
+		public ConnectionDetails? ConnectionModel { get; set; }
 	}
 }

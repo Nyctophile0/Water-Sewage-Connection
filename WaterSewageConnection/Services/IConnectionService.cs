@@ -6,7 +6,8 @@ namespace WaterSewageConnection.Services
 	public interface IConnectionService
 	{
 		Task<bool> AddConnection(ConnectionDetails obj);
-		Task<DataSet> GetAllConnections();
+		Task<string> UpdateConnection(ConnectionDetails obj);
+		Task<DataSet> GetAllConnections(ConnectionDetails obj);
 	}
 
 	public class ConnectionService : IConnectionService
@@ -29,12 +30,24 @@ namespace WaterSewageConnection.Services
 
 			return false;
 		}
-
-		public async Task<DataSet> GetAllConnections()
+		
+		public async Task<string> UpdateConnection(ConnectionDetails obj)
 		{
-			ConnectionDetails obj = new ConnectionDetails();
+			if (string.IsNullOrEmpty(obj.Action))
+				obj.Action = "updateconnectiondetails";
 
-			obj.Action = "selectallConnections";
+			string message = await obj.saveAsync();
+
+			return (!string.IsNullOrEmpty(message)) ? message : string.Empty;
+		}
+
+		public async Task<DataSet> GetAllConnections(ConnectionDetails obj)
+		{
+			// = new ConnectionDetails();
+			if (string.IsNullOrEmpty(obj.Action))
+				obj.Action = "selectallConnections";
+
+
 
 			return await obj.getDataSetAsync();
 		}

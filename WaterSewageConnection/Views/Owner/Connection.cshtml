@@ -46,7 +46,7 @@
 						<div id="toggleIconsCollapseOne" class="collapse show" aria-labelledby="toggleIconsOne" data-parent="">
 							<div class="accordion-body">
 								<div class="row gutters">
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" id="applyingfordiv">
 										<div class="form-group">
 											<label for="ConnectionName" class="col-form-label">Applying for</label><span class="text-danger" style="font-weight:bold;"> @Html.ValidationMessageFor(m=>m.ConnectionName)</span><br />
 											<div class="form-check form-check-inline">
@@ -411,6 +411,23 @@
 		$('#noofconnections').hide();
 		$('#connection1').hide();
 		$('#connection2').hide();
+
+		// hide new/extra connection radio buttons initially
+		$('#connectiondiv').hide();
+
+		$('#applyingfordiv').on('click', 'input[type="radio"][name="ConnectionName"]', function () {
+			var value = $(this).val();
+
+			if (value == 'Water') {
+				$('#connectiondiv').hide();
+				$('#noofconnections').hide();
+				$('#connection1').hide();
+				$('#connection2').hide();
+			}
+			else {
+				$('#connectiondiv').show();
+			}
+		});
 
 		// Add event listener to the parent div
 		$('#connectiondiv').on('click', 'input[type="radio"][name="ConnectionType"]', function () {

@@ -152,11 +152,11 @@ namespace WaterSewageConnection.Controllers
 						string nameOfFile = fname.Replace("~", "-");
 
 						nameOfFile = filetypes[i] + "_" + nameOfFile;
-						string signedPath = "~/Uploads/Files/" + nameOfFile;
+						string signedPath = "~/Files/" + nameOfFile;
 						
 
 						// Save file asynchronously using IFormFile's OpenReadStream and a FileStream
-						using (var stream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(), "Uploads/Files/", nameOfFile), FileMode.Create))
+						using (var stream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/", nameOfFile), FileMode.Create))
 						{
 							await file.CopyToAsync(stream);
 						}
