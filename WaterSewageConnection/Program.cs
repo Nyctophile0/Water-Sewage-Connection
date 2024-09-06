@@ -57,6 +57,8 @@ builder.Services.AddAuthentication().AddCookie("jwtToken", options =>
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IConnectionService, ConnectionService>();
+// add a service for custom middleware
+builder.Services.AddScoped<CustomMiddleware>();
 
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
@@ -106,8 +108,7 @@ app.UseStatusCodePages(async context =>
 
 });
 
-// Middleware configuration (middleware stays above authentication and authorization) [Request Pipeline]
-app.UseMiddleware<TokenMiddleware>();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -120,6 +121,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
+// Middleware configuration 
+
+// custom middleware
+//app.UseMiddleware<CustomMiddleware>();
+app.CustomMiddlewareExtensionMethod();
+
+// conventional custom middleware
+app.UseTokenMiddleware();
 
 // runs the application,start listening the incomming request. It turns a console application into an MVC application based on the provided configuration.
 
